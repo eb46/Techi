@@ -1,6 +1,6 @@
 class App extends React.Component {
   state = {
-    replies: []
+    replies: [],
   }
 
   // CREATE
@@ -43,6 +43,50 @@ class App extends React.Component {
     )
   }
 
+// DELETE
+  deletePost = (event) => {
+    event.preventDefault();
+    axios.delete('/reply/' + event.target.value).then(
+      (response) => {
+        this.setState(
+          {
+            replies: response.data
+          })
+        }
+      )
+    }
+
+//edit name
+  editName = (event) => {
+    this.setState({
+      updateName: event.target.value
+    })
+  }
+
+//edit reply
+  editReply = (event) => {
+    this.setState({
+      updateReply: event.target.value
+    })
+  }
+
+//EDIT
+  updateReply = (event) => {
+    event.preventDefault();
+    const id = event.target.getAttribute('id');
+    axios.put(
+      '/reply/' + id,
+      {
+        name: this.state.updateName,
+        reply: this.state.updateReply,
+      }
+    ).then((response) => {
+      this.setState({
+        replies: response.data
+      })
+    })
+  }
+
   render = () => {
     return (<div>
       <h1>working!</h1>
@@ -50,7 +94,6 @@ class App extends React.Component {
 
     )
   }
-}
 ReactDOM.render(
   <App></App>,
   document.querySelector('main')
