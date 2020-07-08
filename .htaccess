@@ -5,13 +5,13 @@ Header always set Access-Control-Allow-Headers "Content-Type"
 RewriteEngine On
 
 RewriteCond %{REQUEST_METHOD} ^GET$
-RewriteRule ^posts$ controllers/posts_contr.php?action=index
+RewriteRule ^reply$ controllers/posts_contr.php?action=index
 
 RewriteCond %{REQUEST_METHOD} ^POST$
-RewriteRule ^posts$ controllers/posts_contr.php?action=post
+RewriteRule ^reply$ controllers/posts_contr.php?action=post
 
 RewriteCond %{REQUEST_METHOD} ^PUT$
-RewriteRule ^posts/([0-9]+)$ controllers/posts_contr.php?action=update&id=$1
+RewriteRule ^reply/([0-9]+)$ controllers/posts_contr.php?action=update&id=$1
 
 RewriteCond %{REQUEST_METHOD} ^DELETE$
-RewriteRule ^posts/([0-9]+)$ controllers/posts_contr.php?action=delete&id=$1
+RewriteRule ^reply/([0-9]+)$ controllers/posts_contr.php?action=delete&id=$1
