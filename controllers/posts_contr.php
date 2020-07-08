@@ -17,7 +17,7 @@
       $updated_reply = new Post($_REQUEST['id'], $body_object->name, $body_object->reply);
       $all_posts = Reply::update($updated_reply);
       echo json_encode($all_posts);
-  } else if ($REQUEST['action'] === 'delete'){
+  } else if ($_REQUEST['action'] === 'delete'){
       $all_posts = Reply::delete($_REQUEST['id']);
       echo json_encode($all_posts);
   }
