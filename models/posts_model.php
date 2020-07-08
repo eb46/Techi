@@ -42,7 +42,7 @@ class Reply {
   }
 // update function
   static function update($updated_reply){
-    $query = "UPDATE reply SET name= $1, reply = $2 WHERE id = $4";
+    $query = "UPDATE reply SET name= $1, reply = $2 WHERE id = $3";
     $query_params = array($updated_reply->name, $updated_reply->reply, $updated_reply->id);
     $result = pg_query_params($query, $query_params);
 
