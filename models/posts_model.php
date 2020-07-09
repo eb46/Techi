@@ -39,7 +39,7 @@ class Reply {
   static function all(){
     $replies = array();
 
-    $results = pg_query("SELECT * FROM reply");
+    $results = pg_query("SELECT * FROM reply ORDER by id DESC");
 
     $row_object = pg_fetch_object($results);
     while($row_object) {

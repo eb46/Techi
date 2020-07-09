@@ -181,7 +181,7 @@ li {
   background-color: rgb(165, 216, 214);
   border: none;
   float: right;
-  color: white;
+  color: black;
 }
 
 #edit-del-btn:hover {

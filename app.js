@@ -240,7 +240,7 @@ class App extends React.Component {
 
                 <button
                 id="edit-del-btn"
-                value={blog.id} onClick={this.deletePost}><img src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/></button>
+                value={blog.id} onClick={this.deletePost}>X</button>
 
                 <Edit blog={blog}></Edit>
 
