@@ -158,6 +158,7 @@ class App extends React.Component {
   }
 
   render = () => {
+
     return (<div>
       <h1>Techi</h1>
       <button onClick={this.revealQuestion}>Question</button>
@@ -168,7 +169,7 @@ class App extends React.Component {
       { this.state.createForm ? (<form onSubmit={this.createReply}>
         <input type="text" placeholder="Name" onKeyUp={this.changeNewName}/><br/>
         <input type="text" placeholder="Reply" onKeyUp={this.changeNewReply}/><br/>
-        <select>
+        <select >
           <option value={this.state.ques1}>Big O</option>
           <option value={this.state.ques2}>API</option>
         </select>
