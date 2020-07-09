@@ -197,6 +197,15 @@ cursor: pointer;
   font-size: 16px;
   font-weight: 100;
 }
+
+#update-topic {
+  width: 146.5px;
+}
+
+#update-topic::placeholder {
+  color: #ccc;
+}
+
 .header-section {
  background-image: url('header-img.png');
  background-repeat: no-repeat;

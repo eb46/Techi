@@ -1,11 +1,14 @@
 //////////////////
 //     Edit      //
 //////////////////
-const topics = ['Big O', 'API'];
+
+// Comments: We made two separate classes (Edit, App). The purpose of the Edit class is to allow us to map over and edit each individual reply. Without mapping, it would edit/update all the replies at once.
 
 class Edit extends React.Component {
   state = {
-    editForm: false
+    editForm: false,
+    topics: ['Topic', 'Big O', 'API', 'Data Structures'],
+    optionSelected: ''
   }
 
   //edit name
@@ -14,13 +17,6 @@ class Edit extends React.Component {
         updateName: event.target.value
       })
     }
-
-  //edit topic
-  // editTopic = (event) => {
-  //   this.setState({
-  //     updateTopic: event.target.value
-  //   })
-  // }
 
   //edit reply
     editReply = (event) => {
@@ -37,6 +33,7 @@ class Edit extends React.Component {
         '/reply/' + id,
         {
           name: this.state.updateName,
+          topic: this.state.optionSelected,
           reply: this.state.updateReply,
         }
       ).then((response) => {
@@ -53,6 +50,12 @@ class Edit extends React.Component {
       })
     }
 
+    dropDownSelect = (event) => {
+      this.setState({
+        optionSelected: event.target.value
+      })
+    }
+
   render = () => {
     const {blog} = this.props;
     return ( <div>
@@ -64,6 +67,13 @@ class Edit extends React.Component {
 
       { this.state.editForm ? (<form id={blog.id} onSubmit={this.updateReply}>
         <input type="text" placeholder="Name" onKeyUp={this.editName}/><br/>
+        <div>
+          <select id="update-topic" value={this.state.optionSelected} onChange={this.dropDownSelect}>
+            { this.state.topics.map((topic, index) => (
+              <option value={topic}>{topic}</option>
+            )) }
+          </select><br/>
+        </div>
         <input type="text" placeholder="Reply" onKeyUp={this.editReply}/><br/>
         <input type="submit" value="Update"/><br/>
         </form>) : ('')}
@@ -73,9 +83,7 @@ class Edit extends React.Component {
 }
 
 // ===> Global Variables
-const questions = ['Please explain Big O Notation in the simiplest terms.', 'How would you explain APIs to my non-technical mother?']
-// const randQuestion = questions[Math.floor(Math.random() * questions.length)];
-
+const questions = ['Please explain Big O Notation in the simiplest terms.', 'How would you explain APIs to my non-technical mother?', 'What is a Queue, how it is different from stack and how is it implemented?']
 
 //////////////////
 //     App      //
@@ -87,7 +95,7 @@ class App extends React.Component {
     createForm: false,
     pastReplies: false,
     displayQues: false,
-    topics: ['Big O', 'API', 'Data Structures'],
+    topics: ['Topic', 'Big O', 'API', 'Data Structures'],
     optionSelected: '',
   }
 
@@ -115,12 +123,6 @@ class App extends React.Component {
       newName: event.target.value
     })
   }
-
-  // changeNewTopic = (event) => {
-  //   this.setState({
-  //     newTopic: event.target.value
-  //   })
-  // }
 
   changeNewReply = (event) => {
     this.setState({
