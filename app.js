@@ -74,14 +74,12 @@ class App extends React.Component {
     replies: [],
     createForm: false,
     pastReplies: false,
-    displayQues: false,
-    ques1: "Big O",
-    ques2: "API"
-
+    displayQues: false
   }
 
   // CREATE
   createReply = (event) => {
+    event.preventDefault()
     axios.post(
       '/reply',
       {
@@ -157,6 +155,12 @@ class App extends React.Component {
     })
   }
 
+  dropDownSelect = (event) => {
+    this.setState({
+      selectOption: event.target.value
+    })
+  }
+
   render = () => {
 
     return (<div>
@@ -169,9 +173,9 @@ class App extends React.Component {
       { this.state.createForm ? (<form onSubmit={this.createReply}>
         <input type="text" placeholder="Name" onKeyUp={this.changeNewName}/><br/>
         <input type="text" placeholder="Reply" onKeyUp={this.changeNewReply}/><br/>
-        <select >
-          <option value={this.state.ques1}>Big O</option>
-          <option value={this.state.ques2}>API</option>
+        <select onChange={this.dropDownSelect}>
+          <option value="Big O">Big O</option>
+          <option value="API">API</option>
         </select>
         <input type="submit" value="Share"/><br/>
       </form>) : ('')}
@@ -185,7 +189,7 @@ class App extends React.Component {
                 return <li>
                 <h2>{blog.name}</h2>
                 <h3>{blog.reply}</h3>
-                <em>{}</em>
+                <em>{this.state.selectOption}</em>
                 <button value={blog.id} onClick={this.deletePost}>Delete</button>
 
                 <Edit blog={blog}></Edit>

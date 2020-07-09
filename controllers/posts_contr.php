@@ -8,13 +8,13 @@
   } else if ($_REQUEST['action'] === 'post'){
       $request_body = file_get_contents('php://input');
       $body_object = json_decode($request_body);
-      $new_reply = new Post(null, $body_object->name, $body_object->reply);
+      $new_reply = new Post(null, $body_object->name, $body_object->topic, $body_object->reply);
       $all_posts = Reply::create($new_reply);
       echo json_encode($all_posts);
   } else if ($_REQUEST['action'] === 'update'){
       $request_body = file_get_contents('php://input');
       $body_object = json_decode($request_body);
-      $updated_reply = new Post($_REQUEST['id'], $body_object->name, $body_object->reply);
+      $updated_reply = new Post($_REQUEST['id'], $body_object->name, $body_object->topic, $body_object->reply);
       $all_posts = Reply::update($updated_reply);
       echo json_encode($all_posts);
   } else if ($_REQUEST['action'] === 'delete'){
