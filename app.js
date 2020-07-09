@@ -202,7 +202,7 @@ class App extends React.Component {
         <em id="question-em">Question: </em><br/>
         <h3 id="question-txt">
         {this.state.randQuestion}</h3></div>) : ('')}
-      
+
 
       { this.state.createForm ? (<div className="create-form-div"><form className="create-form" onSubmit={this.createReply}>
         <div className="name-topic-form">
@@ -240,7 +240,7 @@ class App extends React.Component {
 
                 <button
                 id="edit-del-btn"
-                value={blog.id} onClick={this.deletePost}><img src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/></button>
+                value={blog.id} onClick={this.deletePost}>X</button>
 
                 <Edit blog={blog}></Edit>
 
