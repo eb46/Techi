@@ -91,7 +91,7 @@ class App extends React.Component {
     ).then(
       (response) => {
         this.setState({
-          replies: response.data
+          replies: response.data,
         })
       }
     )
@@ -136,14 +136,16 @@ class App extends React.Component {
   //toggle create form
   toggleCreateForm = () => {
     this.setState({
-      createForm: !this.state.createForm
+      createForm: !this.state.createForm,
+      pastReplies: false
     })
   }
 
   //toggle past replies
   togglePastReplies = () => {
     this.setState({
-      pastReplies: !this.state.pastReplies
+      pastReplies: !this.state.pastReplies,
+      createForm: false
     })
   }
   //toggle question
