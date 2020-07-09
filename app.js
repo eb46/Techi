@@ -56,7 +56,11 @@ class Edit extends React.Component {
   render = () => {
     const {blog} = this.props;
     return ( <div>
-      <button onClick={this.toggleEditForm}>Edit</button>
+      <button
+      id="edit-del-btn"
+      onClick={this.toggleEditForm}>
+      <img id="edit-icon" src="https://img.icons8.com/material-sharp/24/000000/edit.png"/>
+      </button>
 
       { this.state.editForm ? (<form id={blog.id} onSubmit={this.updateReply}>
         <input type="text" placeholder="Name" onKeyUp={this.editName}/><br/>
@@ -180,46 +184,74 @@ class App extends React.Component {
 
   render = () => {
 
-    return (<div>
-      <h1>Techi</h1>
-      <button onClick={this.revealQuestion}>Question</button>
-      { this.state.displayQues ? (<div className="question-div">{this.state.randQuestion}</div>) : ('')}
+    return (<div className="body-div">
+      <div className="header-section">
+        <h1 className="techi-title">Techi</h1>
+      </div>
+      <div className="grid-container">
+        <nav>
+          <h2 className="nav-title">Navigation</h2>
+          <button id="nav-btn" onClick={this.revealQuestion}>Question</button><br/>
+          <button id="nav-btn" onClick={this.toggleCreateForm}>Add Reply</button><br/>
+          <button id="nav-btn" onClick={this.togglePastReplies}>Past Replies</button>
+        </nav>
 
-      <button onClick={this.toggleCreateForm}>Add Reply</button>
+      <div className="container">
 
-      { this.state.createForm ? (<form onSubmit={this.createReply}>
-        <input type="text" placeholder="Name" onKeyUp={this.changeNewName}/><br/>
-        <input type="text" placeholder="Reply" onKeyUp={this.changeNewReply}/><br/>
+        { this.state.displayQues ? (<div className="question-div">
+        <em id="question-em">Question: </em><br/>
+        <h3 id="question-txt">
+        {this.state.randQuestion}</h3></div>) : ('')}
+      
 
-        <select value={this.state.optionSelected} onChange={this.dropDownSelect}>
-          { this.state.topics.map((topic, index) => (
-            <option value={topic}>{topic}</option>
-          )) }
-        </select>
+      { this.state.createForm ? (<div className="create-form-div"><form className="create-form" onSubmit={this.createReply}>
+        <div className="name-topic-form">
+          <div>
+            <label>Name</label><br/>
+            <input id="name-input" type="text" placeholder="add your name" onKeyUp={this.changeNewName}/>
+          </div>
 
-        <input type="submit" value="Share"/><br/>
-      </form>) : ('')}
+          <div id="topic-div">
+            <label id="topic-label">Topic</label>
+            <select value={this.state.optionSelected} onChange={this.dropDownSelect}>
+              { this.state.topics.map((topic, index) => (
+                <option value={topic}>{topic}</option>
+              )) }
+            </select><br/>
+          </div>
+        </div>
+
+          <div>
+          <label>Reply</label><br/>
+          <textarea id="reply-textbox" type="text" placeholder="write your answer" onKeyUp={this.changeNewReply}/><br/>
+          </div>
+
+          <input type="submit" value="Share"/><br/>
+        </form></div>) : ('')}
 
 
-      <button onClick={this.togglePastReplies}>Past Replies</button>
         { this.state.pastReplies ?  (<div>
           <ul>
             {this.state.replies.map(
               (blog) => {
                 return <li>
-                <h2>{blog.name}</h2>
-                <em>{blog.topic}</em>
-                <h3>{blog.reply}</h3>
-                <button value={blog.id} onClick={this.deletePost}>Delete</button>
+                <h2>{blog.name} <em id="topic-em">Topic: {blog.topic}</em></h2>
+                <p>{blog.reply}</p>
+
+                <button
+                id="edit-del-btn"
+                value={blog.id} onClick={this.deletePost}><img src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/></button>
 
                 <Edit blog={blog}></Edit>
 
                 </li>
               }
             )}
-          </ul>
-        </div>) : ('') }
+            </ul>
+          </div>) : ('') }
+        </div>
       </div>
+    </div>
 
     )
   }
