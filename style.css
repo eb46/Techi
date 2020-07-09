@@ -215,3 +215,8 @@ cursor: pointer;
  padding-bottom: 160px;
  background-color: rgb(27, 27, 27);
 }
+
+.delete-btn {
+  font-size: 16px;
+
+}
