@@ -239,7 +239,7 @@ class App extends React.Component {
                 <p>{blog.reply}</p>
 
                 <button
-                id="edit-del-btn"
+                id="edit-del-btn" className="delete-btn"
                 value={blog.id} onClick={this.deletePost}>X</button>
 
                 <Edit blog={blog}></Edit>
