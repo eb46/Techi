@@ -202,7 +202,7 @@ class App extends React.Component {
         <em id="question-em">Question: </em><br/>
         <h3 id="question-txt">
         {this.state.randQuestion}</h3></div>) : ('')}
-      
+
 
       { this.state.createForm ? (<div className="create-form-div"><form className="create-form" onSubmit={this.createReply}>
         <div className="name-topic-form">
