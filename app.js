@@ -1,6 +1,7 @@
 //////////////////
 //     Edit      //
 //////////////////
+const topics = ['Big O', 'API'];
 
 class Edit extends React.Component {
   state = {
@@ -13,6 +14,13 @@ class Edit extends React.Component {
         updateName: event.target.value
       })
     }
+
+  //edit topic
+  // editTopic = (event) => {
+  //   this.setState({
+  //     updateTopic: event.target.value
+  //   })
+  // }
 
   //edit reply
     editReply = (event) => {
@@ -74,17 +82,20 @@ class App extends React.Component {
     replies: [],
     createForm: false,
     pastReplies: false,
-    displayQues: false
+    displayQues: false,
+    topics: ['Big O', 'API', 'Data Structures'],
+    optionSelected: '',
   }
 
   // CREATE
   createReply = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     axios.post(
       '/reply',
       {
         name: this.state.newName,
-        reply: this.state.newReply
+        topic: this.state.optionSelected,
+        reply: this.state.newReply,
       }
     ).then(
       (response) => {
@@ -100,6 +111,12 @@ class App extends React.Component {
       newName: event.target.value
     })
   }
+
+  // changeNewTopic = (event) => {
+  //   this.setState({
+  //     newTopic: event.target.value
+  //   })
+  // }
 
   changeNewReply = (event) => {
     this.setState({
@@ -157,11 +174,12 @@ class App extends React.Component {
 
   dropDownSelect = (event) => {
     this.setState({
-      selectOption: event.target.value
+      optionSelected: event.target.value
     })
   }
 
   render = () => {
+
     return (<div>
       <h1>Techi</h1>
       <button onClick={this.revealQuestion}>Question</button>
@@ -172,10 +190,13 @@ class App extends React.Component {
       { this.state.createForm ? (<form onSubmit={this.createReply}>
         <input type="text" placeholder="Name" onKeyUp={this.changeNewName}/><br/>
         <input type="text" placeholder="Reply" onKeyUp={this.changeNewReply}/><br/>
-        <select onChange={this.dropDownSelect}>
-          <option value="Big O">Big O</option>
-          <option value="API">API</option>
+
+        <select value={this.state.optionSelected} onChange={this.dropDownSelect}>
+          { this.state.topics.map((topic, index) => (
+            <option value={topic}>{topic}</option>
+          )) }
         </select>
+
         <input type="submit" value="Share"/><br/>
       </form>) : ('')}
 
@@ -187,8 +208,8 @@ class App extends React.Component {
               (blog) => {
                 return <li>
                 <h2>{blog.name}</h2>
+                <em>{blog.topic}</em>
                 <h3>{blog.reply}</h3>
-                <em>{this.state.selectOption}</em>
                 <button value={blog.id} onClick={this.deletePost}>Delete</button>
 
                 <Edit blog={blog}></Edit>
